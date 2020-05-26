@@ -43,7 +43,7 @@ GEN_RBI=false
 GEN_TYPESCRIPT=false
 LINT=false
 LINT_CHECKS=""
-SUPPORTED_LANGUAGES=("go" "ruby" "csharp" "java" "python" "objc" "gogo" "php" "node" "web" "cpp" "descriptor_set" "scala")
+SUPPORTED_LANGUAGES=("go" "ruby" "csharp" "java" "python" "objc" "gogo" "php" "node" "web" "web-client" "cpp" "descriptor_set" "scala")
 EXTRA_INCLUDES=""
 OUT_DIR=""
 GO_SOURCE_RELATIVE=""
@@ -287,6 +287,9 @@ plugins=grpc+embedded\
         ;;
     "node")
         GEN_STRING="--grpc_out=$OUT_DIR --js_out=import_style=commonjs,binary:$OUT_DIR --plugin=protoc-gen-grpc=`which grpc_${PLUGIN_LANG}_plugin`"
+        ;;
+    "web-client")
+        GEN_STRING="--ts_out=service=grpc-web:$OUT_DIR --js_out=import_style=commonjs,binary:$OUT_DIR --plugin=protoc-gen-ts=`which protoc-gen-ts`"
         ;;
     "web")
         GEN_STRING="--grpc-web_out=import_style=typescript,mode=grpcwebtext:$OUT_DIR --js_out=import_style=commonjs:$OUT_DIR --plugin=protoc-gen-grpc-web=`which grpc_${PLUGIN_LANG}_plugin`"
